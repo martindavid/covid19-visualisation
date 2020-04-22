@@ -1,12 +1,6 @@
 import { knex, runQuery } from "./knex";
-import {
-  WorldAggregateSummary,
-  WorldAggregateAccumulation,
-} from "./types/world-aggregated";
 
-export const fetchWorldAggregatedSummary = async (): Promise<
-  WorldAggregateSummary
-> => {
+export const fetchWorldAggregatedSummary = async (): Promise<any> => {
   return await runQuery({
     label: "FETCH_WORLD_AGGREGATED_DATA_SUMMARY",
     queryFn: async () => {
@@ -24,9 +18,7 @@ export const fetchWorldAggregatedSummary = async (): Promise<
   });
 };
 
-export const fetchWorldAggregateDataAccumulation = async (): Promise<
-  Array<WorldAggregateAccumulation>
-> => {
+export const fetchWorldAggregateDataAccumulation = async (): Promise<any> => {
   return await runQuery({
     label: "FETCH_WORLD_AGGREGATED_DATA",
     queryFn: async () => {

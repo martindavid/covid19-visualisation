@@ -1,9 +1,6 @@
 import { knex, runQuery } from "./knex";
-import { CountryAggregatedSummary } from "./types/country-aggregated";
 
-export const fetchCountryAggregatedSummary = async (): Promise<
-  Array<CountryAggregatedSummary>
-> => {
+export const fetchCountryAggregatedSummary = async (): Promise<any> => {
   return await runQuery({
     label: "FETCH_COUNTRY_AGGREGATED_DATA_SUMMARY",
     queryFn: async () => {
@@ -24,7 +21,7 @@ export const fetchCountryAggregatedSummary = async (): Promise<
   });
 };
 
-export const fetchTopCountryStats = async (): Promise<Array<any>> => {
+export const fetchTopCountryStats = async (): Promise<any> => {
   return await runQuery({
     label: "FETCH_TOP_COUNTRY_STATS",
     queryFn: async () => {
