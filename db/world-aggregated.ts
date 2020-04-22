@@ -31,7 +31,7 @@ export const fetchWorldAggregateDataAccumulation = async (): Promise<
     label: "FETCH_WORLD_AGGREGATED_DATA",
     queryFn: async () => {
       const data = await knex.raw(`
-          select date,
+          select TO_CHAR(date, 'YYYY-MM-DD') date,
                 confirmed,
                 case
                     when previous_day_confirmed = 0 then 0

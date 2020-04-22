@@ -11,7 +11,7 @@ export const Layout = (props: LayoutProps) => {
     <>
       <Header />
       <ErrorBoundary>
-        <main className="container mt-3">{props.children}</main>
+        <main className="container-fluid mt-3">{props.children}</main>
       </ErrorBoundary>
       <Footer />
     </>

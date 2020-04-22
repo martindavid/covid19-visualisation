@@ -1,5 +1,5 @@
 export type WorldAggregateSummary = {
-  date: Date;
+  date: string;
   confirmed: number;
   recovered: number;
   death: number;

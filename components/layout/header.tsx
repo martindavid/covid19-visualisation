@@ -10,9 +10,9 @@ export const Header = () => {
   };
   return (
     <header className="bg-light">
-      <div className="container">
+      <div className="container-fluid">
         <Navbar color="light" light expand="md">
-          <NavbarBrand href="/">Flask/NextJs App</NavbarBrand>
+          <NavbarBrand href="/">COVID19 Visualisation</NavbarBrand>
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>
             <Menu />
