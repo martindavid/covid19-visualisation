@@ -7,6 +7,7 @@ const WorldAggregatedApi = async (
 ) => {
   const data = await fetchWorldAggregateDataAccumulation();
   if (data.error) {
+    console.log(data.source);
     res.status(500).json({
       message:
         "There's something wrong with your request, please try again later",

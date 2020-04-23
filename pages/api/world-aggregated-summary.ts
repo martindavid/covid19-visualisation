@@ -7,6 +7,7 @@ const WorldAggregatedSummaryApi = async (
 ) => {
   const data = await fetchWorldAggregatedSummary();
   if (data.error) {
+    console.log(data.source);
     res.status(500).json({
       message:
         "There's something wrong with your request, please try again later",
