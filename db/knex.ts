@@ -1,9 +1,18 @@
 import Knex from "knex";
 
+const pg = require("pg");
+pg.defaults.ssl = process.env.NODE_ENV != "development";
+
 export const knex = Knex({
   client: "pg",
-  connection: process.env.DB_URL,
-  searchPath: ["covid19", "public"],
+  connection: {
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    port: process.env.DB_PORT ? parseInt(process.env.DB_PORT) : 5432,
+    ssl: process.env.SSL_MODE == "true",
+  },
 });
 
 type runQueryProps = {
