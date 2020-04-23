@@ -5,6 +5,7 @@ import {
   WorldAggregateSummary,
   WorldAggregateAccumulation,
 } from "db/types/world-aggregated";
+import { CountryAggregatedSummary } from "db/types/country-aggregated";
 
 export type WorldAggregateSummaryResponse =
   | { kind: "ok"; data: WorldAggregateSummary }
@@ -12,6 +13,9 @@ export type WorldAggregateSummaryResponse =
 
 export type WorldAggregateDataResponse =
   | { kind: "ok"; data: Array<WorldAggregateAccumulation> }
+  | GeneralApiProblem;
+export type TopCountryStatsResponse =
+  | { kind: "ok"; data: Array<CountryAggregatedSummary> }
   | GeneralApiProblem;
 export type GeneralStatusResponse =
   | { kind: "ok"; message: string }
@@ -21,6 +25,24 @@ export class DataHubApi extends Api {
   async fetchWorldAggregatedData(): Promise<WorldAggregateDataResponse> {
     const response: ApiResponse<any> = await this.apisauce.get(
       "/api/world-aggregated"
+    );
+
+    if (!response.ok) {
+      const problem = getGeneralApiProblem(response);
+      if (problem) return problem;
+    }
+
+    try {
+      const data = response.data;
+      return { kind: "ok", data: data };
+    } catch {
+      return { kind: "bad-data" };
+    }
+  }
+
+  async fetchTopCountryStats(): Promise<TopCountryStatsResponse> {
+    const response: ApiResponse<any> = await this.apisauce.get(
+      "/api/top-country"
     );
 
     if (!response.ok) {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { DataHubApi } from "services/datahub";
 import Chart from "react-apexcharts";
+
 const WorldAggregateLineView = () => {
   const [data, setData] = useState(null);
 
@@ -73,7 +74,7 @@ const WorldAggregateLineView = () => {
   if (data) {
     return <Chart series={data.series} options={data.options} />;
   }
-  return <div>World Aggregate Line View</div>;
+  return <div>Loading...</div>;
 };
 
 export default WorldAggregateLineView;

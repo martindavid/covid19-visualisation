@@ -10,6 +10,13 @@ const WorldAggregateLineView = dynamic(
     ssr: false,
   }
 );
+const CountryKeyStackView = dynamic(
+  // @ts-ignore
+  () => import("components/country-key-stack"),
+  {
+    ssr: false,
+  }
+);
 
 export default class Index extends Component {
   render() {
@@ -34,6 +41,9 @@ export default class Index extends Component {
           </div>
           <div className="col-6">
             <WorldAggregateLineView />
+          </div>
+          <div className="col-6">
+            <CountryKeyStackView />
           </div>
         </div>
       </Layout>
