@@ -122,7 +122,6 @@ const CountryKeyStackView = () => {
   }, []);
 
   if (data) {
-    console.log(data.series);
     return <Chart series={data.series} type="area" options={data.options} />;
   }
   return <div>Loading...</div>;

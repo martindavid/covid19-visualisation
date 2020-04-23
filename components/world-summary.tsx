@@ -22,28 +22,26 @@ export const WorldSummaryView = () => {
     fetchData();
   }, []);
 
-  console.log(data);
-
   if (data) {
     return (
       <div className="row">
-        <div className="col-4">
+        <div className="col-3">
           <Card
             title="Confirmed"
-            subtitle={data.confirmed}
+            subtitle={data.confirmed.toLocaleString()}
             iconClass="fa-hospital"
             additionalStats={data.confirmed_increased}
           />
         </div>
-        <div className="col-4">
+        <div className="col-3">
           <Card
             additionalStats={data.death_increased}
             title="Deaths"
-            subtitle={data.death}
+            subtitle={data.death.toLocaleString()}
             iconClass="fa-cross"
           />
         </div>
-        <div className="col-4">
+        <div className="col-3">
           <Card
             title="Mortality Rate"
             subtitle={`${mortalityRate.toFixed(2).toString()}%`}
