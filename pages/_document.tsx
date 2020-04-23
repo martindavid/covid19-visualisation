@@ -36,6 +36,7 @@ export default class CustomDocument extends Document {
   }
 
   render() {
+    const isProduction = process.env.NODE_ENV === "production";
     return (
       <Html lang="en">
         <Head>
@@ -58,6 +59,27 @@ export default class CustomDocument extends Document {
         <body>
           <Main />
           <NextScript />
+          {isProduction && (
+            <>
+              <script
+                async
+                src="https://www.googletagmanager.com/gtag/js?id=UA-164139816-2"
+              ></script>
+              <script
+                async
+                defer
+                dangerouslySetInnerHTML={{
+                  __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+
+                gtag('config', 'UA-164139816-2');
+                `,
+                }}
+              />
+            </>
+          )}
         </body>
       </Html>
     );
