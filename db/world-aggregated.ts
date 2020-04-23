@@ -4,9 +4,30 @@ export const fetchWorldAggregatedSummary = async (): Promise<any> => {
   return await runQuery({
     label: "FETCH_WORLD_AGGREGATED_DATA_SUMMARY",
     queryFn: async () => {
-      const data = await knex.raw(
-        "select date, confirmed, recovered, death from worldwide_aggregated where date = (select max(date) from worldwide_aggregated);"
-      );
+      const data = await knex.raw(`
+        SELECT date,
+              recovered,
+              confirmed,
+              ((confirmed - confirmed_last_week)::float / confirmed_last_week) * 100 confirmed_increased,
+              death,
+              ((death - death_last_week)::float / death_last_week) * 100 death_increased,
+              death_last_week
+        FROM (select 1 as id,
+                    date,
+                    confirmed,
+                    recovered,
+                    death
+              from worldwide_aggregated
+              where date = (select max(date) from worldwide_aggregated)) A
+                join
+            (select 1         as id,
+                    confirmed as confirmed_last_week,
+                    death     as death_last_week
+              from worldwide_aggregated
+              where date = (select max(date) - 7 from worldwide_aggregated)
+            ) B
+            ON A.id = B.id;
+        `);
       return data.rows && data.rows.length > 0 ? data.rows[0] : null;
     },
     errorFn: async (e) => {

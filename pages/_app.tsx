@@ -1,4 +1,5 @@
 import App from "next/app";
+import Head from "next/head";
 import Router from "next/router";
 import NProgress from "nprogress";
 
@@ -20,6 +21,13 @@ export default class CustomApp extends App {
   render() {
     const { Component, pageProps } = this.props;
 
-    return <Component {...pageProps} />;
+    return (
+      <>
+        <Head>
+          <title>COVID19 Visualisation</title>
+        </Head>
+        <Component {...pageProps} />
+      </>
+    );
   }
 }

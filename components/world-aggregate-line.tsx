@@ -25,6 +25,13 @@ const WorldAggregateLineView = () => {
         ];
 
         const options = {
+          colors: ["#F04C5D", "#0168B3"],
+          legend: {
+            itemMargin: {
+              vertical: 15,
+              horizontal: 10,
+            },
+          },
           chart: {
             height: 350,
             type: "line",
@@ -33,7 +40,7 @@ const WorldAggregateLineView = () => {
             width: [0, 2],
           },
           title: {
-            text: "New cases vs Deaths",
+            text: "New cases vs Deaths by day",
           },
           dataLabels: {
             enabled: false,

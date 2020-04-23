@@ -39,7 +39,6 @@ export default class CustomDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <title>COVID19 Visualisation</title>
           <meta
             name="description"
             content="A simple application build using Flask and React framework NextJS"
@@ -49,6 +48,10 @@ export default class CustomDocument extends Document {
             href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
             integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             crossOrigin="anonymous"
+          />
+          <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
           />
           <link rel="stylesheet" href="/static/styles/style.css" />
         </Head>

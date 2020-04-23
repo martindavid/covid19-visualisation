@@ -1,0 +1,33 @@
+.card {
+  margin-bottom: 30px;
+  border: 0;
+  box-shadow: 0 0 2rem 0 rgba(136, 152, 170, .15);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  border: 1px solid rgba(0, 0, 0, .05);
+  border-radius: .375rem;
+  background-color: #fff;
+  background-clip: border-box;
+}
+
+.cardBody {
+  min-height: 1px;
+  padding: 1rem 1.5rem;
+  flex: 1 1 auto;
+}
+
+.icon {
+  display: inline-flex;
+  padding: 12px;
+  text-align: center;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  box-shadow: 0 0 2rem 0 rgba(136, 152, 170, .15) !important;
+  border-radius: 50% !important;
+}

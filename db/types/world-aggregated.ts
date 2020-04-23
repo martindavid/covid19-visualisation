@@ -1,8 +1,10 @@
 export type WorldAggregateSummary = {
   date: string;
   confirmed: number;
+  confirmed_increased: number;
   recovered: number;
   death: number;
+  death_increased: number;
 };
 
 export type WorldAggregateAccumulation = {

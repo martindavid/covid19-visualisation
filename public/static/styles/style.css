@@ -247,3 +247,10 @@ body {
     transform: rotate(35deg);
   }
 }
+
+.text-muted {
+    color: #8898aa !important;
+}
+.text-uppercase {
+    text-transform: uppercase !important;
+}

@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import dynamic from "next/dynamic";
 import { Layout } from "components/layout";
 import { WorldSummaryView } from "components/world-summary";
-// import { WorldAggregateLineView } from "components/world-aggregate-line";
 
 const WorldAggregateLineView = dynamic(
   // @ts-ignore
@@ -17,6 +16,19 @@ export default class Index extends Component {
     return (
       <Layout>
         <div className="row">
+          <div className="col-12 mb-3">
+            <span>
+              Source:{" "}
+              <a
+                href="https://datahub.io/core/covid-19"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Novel Coronavirus 2019
+              </a>{" "}
+              clean dataset from Datahub.io
+            </span>
+          </div>
           <div className="col-12">
             <WorldSummaryView />
           </div>

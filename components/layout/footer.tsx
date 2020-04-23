@@ -16,17 +16,8 @@ export const Footer = () => {
       <div className="container">
         <span className="text-white">
           &#169;
-          {`${new Date().getFullYear()} Company Inc. All Rights Reserved`}
+          {`${new Date().getFullYear()} Martinlabs.me All Rights Reserved`}
         </span>
-        <div className="float-right">
-          <a
-            href="https://github.com/martindavid/flask-react-docker-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Github
-          </a>
-        </div>
       </div>
     </CustomFooter>
   );
