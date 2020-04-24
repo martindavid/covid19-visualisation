@@ -55,12 +55,12 @@ const WorldAggregateLineView = () => {
             {
               opposite: true,
               title: {
-                text: "Number of confirmed cases",
+                text: "Number of deaths",
               },
             },
             {
               title: {
-                text: "Number of deaths",
+                text: "Number of confirmed cases",
               },
             },
           ],
