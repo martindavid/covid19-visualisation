@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { DataHubApi } from "services/datahub";
 import { Card } from "components/card";
+import { Row, Col } from "react-bootstrap";
 
 export const WorldSummaryView = () => {
   const [data, setData] = useState(null);
@@ -24,31 +25,40 @@ export const WorldSummaryView = () => {
 
   if (data) {
     return (
-      <div className="row">
-        <div className="col-3">
+      <Row>
+        <Col md={3} xs={12}>
           <Card
             title="Confirmed"
             subtitle={data.confirmed.toLocaleString()}
             iconClass="fa-hospital"
             additionalStats={data.confirmed_increased}
           />
-        </div>
-        <div className="col-3">
+        </Col>
+        <Col md={3} xs={12}>
+          <Card
+            isGood
+            additionalStats={data.recovered_increased}
+            title="Recovered"
+            subtitle={data.recovered.toLocaleString()}
+            iconClass="fa-heart"
+          />
+        </Col>
+        <Col md={3} xs={12}>
           <Card
             additionalStats={data.death_increased}
             title="Deaths"
             subtitle={data.death.toLocaleString()}
             iconClass="fa-cross"
           />
-        </div>
-        <div className="col-3">
+        </Col>
+        <Col xs={12} md={3}>
           <Card
             title="Mortality Rate"
             subtitle={`${mortalityRate.toFixed(2).toString()}%`}
             iconClass="fa-cross"
           />
-        </div>
-      </div>
+        </Col>
+      </Row>
     );
   }
   return <div>Loading...</div>;

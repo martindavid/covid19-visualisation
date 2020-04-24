@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import dynamic from "next/dynamic";
 import { Layout } from "components/layout";
 import { WorldSummaryView } from "components/world-summary";
+import { CountryLatestView } from "components/country-latest-view";
+import { Row, Col } from "react-bootstrap";
 
 const WorldAggregateLineView = dynamic(
   // @ts-ignore
@@ -22,8 +24,8 @@ export default class Index extends Component {
   render() {
     return (
       <Layout>
-        <div className="row">
-          <div className="col-12 mb-3">
+        <Row>
+          <Col md={12} xs={12} className="mb-3">
             <span>
               Source:{" "}
               <a
@@ -35,17 +37,22 @@ export default class Index extends Component {
               </a>{" "}
               clean dataset from Datahub.io
             </span>
-          </div>
-          <div className="col-12">
+          </Col>
+          <Col xs={12} md={12}>
             <WorldSummaryView />
-          </div>
-          <div className="col-6">
+          </Col>
+          <Col xs={12} md={6}>
             <WorldAggregateLineView />
-          </div>
-          <div className="col-6">
+          </Col>
+          <Col xs={12} md={6}>
             <CountryKeyStackView />
-          </div>
-        </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <CountryLatestView />
+          </Col>
+        </Row>
       </Layout>
     );
   }

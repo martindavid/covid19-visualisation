@@ -7,6 +7,7 @@ export const fetchWorldAggregatedSummary = async (): Promise<any> => {
       const data = await knex.raw(`
         SELECT date,
               recovered,
+              ((recovered - recovered_last_week)::float / recovered_last_week) * 100 recovered_increased,
               confirmed,
               ((confirmed - confirmed_last_week)::float / confirmed_last_week) * 100 confirmed_increased,
               death,
@@ -21,6 +22,7 @@ export const fetchWorldAggregatedSummary = async (): Promise<any> => {
               where date = (select max(date) from worldwide_aggregated)) A
                 join
             (select 1         as id,
+                    recovered as recovered_last_week,
                     confirmed as confirmed_last_week,
                     death     as death_last_week
               from worldwide_aggregated

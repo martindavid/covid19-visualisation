@@ -3,6 +3,7 @@ export type WorldAggregateSummary = {
   confirmed: number;
   confirmed_increased: number;
   recovered: number;
+  recovered_increased: number;
   death: number;
   death_increased: number;
 };

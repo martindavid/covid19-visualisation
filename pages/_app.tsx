@@ -2,6 +2,7 @@ import App from "next/app";
 import Router from "next/router";
 import NProgress from "nprogress";
 import { DefaultSeo } from "next-seo";
+import "@devexpress/dx-react-grid-bootstrap4/dist/dx-react-grid-bootstrap4.css";
 
 export default class CustomApp extends App {
   componentDidMount() {

@@ -6,10 +6,33 @@ type CardProps = {
   subtitle: string;
   iconClass?: string;
   additionalStats?: number;
+  isGood?: boolean;
 };
 
 export const Card = (props: CardProps) => {
   const increased = props.additionalStats > 0;
+
+  const renderAdditionalStats = () => {
+    const textColor = props.isGood
+      ? increased
+        ? "text-success"
+        : "text-danger"
+      : increased
+      ? "text-danger"
+      : "text-success";
+    return (
+      <p className="mt-3 mb-0 text-sm">
+        <span className={textColor}>
+          <i
+            className={`fa ${increased ? "fa-arrow-up" : "fa-arrow-down"}`}
+          ></i>{" "}
+          {props.additionalStats.toFixed(2).toString()}%
+        </span>{" "}
+        <span className="text-nowrap">from last week</span>
+      </p>
+    );
+  };
+
   return (
     <div className={styles.card}>
       <div className={styles.cardBody}>
@@ -28,18 +51,10 @@ export const Card = (props: CardProps) => {
             </div>
           )}
         </div>
-        {props.additionalStats && (
-          <p className="mt-3 mb-0 text-sm">
-            <span
-              className={`${increased ? "text-danger" : "text-success"} mr-2`}
-            >
-              <i
-                className={`fa ${increased ? "fa-arrow-up" : "fa-arrow-down"}`}
-              ></i>{" "}
-              {props.additionalStats.toFixed(2).toString()}%
-            </span>
-            <span className="text-nowrap">Since last week</span>
-          </p>
+        {props.additionalStats ? (
+          renderAdditionalStats()
+        ) : (
+          <div className="mt-3 mb-0 text-sm"></div>
         )}
       </div>
     </div>

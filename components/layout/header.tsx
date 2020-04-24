@@ -1,24 +1,22 @@
-import React, { useState } from "react";
-import { Collapse, Navbar, NavbarToggler, NavbarBrand } from "reactstrap";
+import React from "react";
+import { Navbar, Container } from "react-bootstrap";
+import Link from "next/link";
 import { Menu } from "./menu";
 
 export const Header = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggle = () => {
-    setIsOpen(!isOpen);
-  };
   return (
     <header className="bg-light">
-      <div className="container-fluid">
-        <Navbar color="light" light expand="md">
-          <NavbarBrand href="/">COVID19 Visualisation</NavbarBrand>
-          <NavbarToggler onClick={toggle} />
-          <Collapse isOpen={isOpen} navbar>
+      <Container fluid>
+        <Navbar expand="lg" bg="light" className="bg-light p-0">
+          <Link href="/" passHref>
+            <Navbar.Brand>Covid19 Viz.</Navbar.Brand>
+          </Link>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse>
             <Menu />
-          </Collapse>
+          </Navbar.Collapse>
         </Navbar>
-      </div>
+      </Container>
     </header>
   );
 };
