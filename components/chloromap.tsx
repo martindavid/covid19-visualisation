@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { DataHubApi } from "services/datahub";
 import countries from "data/world.json";
 import { ResponsiveChoropleth } from "@nivo/geo";
+import { Loader } from "./loader";
 
 const ChloromapView = () => {
   const [data, setData] = useState(null);
@@ -28,15 +29,16 @@ const ChloromapView = () => {
   }, []);
 
   if (!data) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   return (
     <>
       <div className="title">Confirmed case distribution</div>
-      <div style={{ height: "400px" }}>
+      <div style={{ height: "500px" }}>
         <ResponsiveChoropleth
           data={data}
+          projectionScale={100}
           features={countries.features}
           margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
           colors={[
@@ -54,7 +56,7 @@ const ChloromapView = () => {
           unknownColor="#666666"
           label="properties.name"
           valueFormat=".2s"
-          projectionTranslation={[0.5, 0.5]}
+          projectionTranslation={[0.5, 0.65]}
           projectionRotation={[0, 0, 0]}
           borderWidth={0.5}
           borderColor="#152538"

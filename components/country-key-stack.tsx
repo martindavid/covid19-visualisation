@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { DataHubApi } from "services/datahub";
 import Chart from "react-apexcharts";
+import { Loader } from "./loader";
 
 const CountryKeyStackView = () => {
   const [data, setData] = useState(null);
@@ -131,7 +132,7 @@ const CountryKeyStackView = () => {
       />
     );
   }
-  return <div>Loading...</div>;
+  return <Loader />;
 };
 
 export default CountryKeyStackView;

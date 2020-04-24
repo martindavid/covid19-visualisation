@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { DataHubApi } from "services/datahub";
 import { TableView } from "components/table";
+import { Loader } from "./loader";
 
 export const CountryLatestView = () => {
   const [data, setData] = useState(null);
@@ -33,5 +34,5 @@ export const CountryLatestView = () => {
       </div>
     );
   }
-  return <div>Loading...</div>;
+  return <Loader />;
 };

@@ -260,3 +260,11 @@ body {
   font-weight: 600;
   margin-bottom: 1rem;
 }
+
+.component-loader {
+  display: flex;
+  align-items: center;
+  min-height: 200px;
+  flex-direction: column;
+  justify-content: center;
+}
