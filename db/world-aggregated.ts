@@ -57,6 +57,9 @@ export const fetchWorldAggregateDataAccumulation = async (): Promise<any> => {
                 recovered,
                 case
                     when previous_day_recovered = 0 then 0
+                    else recovered - previous_day_recovered end as daily_recovered_rate_num,
+                case
+                    when previous_day_recovered = 0 then 0
                     else (recovered - previous_day_recovered) end as recovered_increment_rate_num,
                 death,
                 case

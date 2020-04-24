@@ -72,7 +72,7 @@ const WorldAggregateLineView = () => {
   }, []);
 
   if (data) {
-    return <Chart series={data.series} options={data.options} />;
+    return <Chart height={500} series={data.series} options={data.options} />;
   }
   return <div>Loading...</div>;
 };

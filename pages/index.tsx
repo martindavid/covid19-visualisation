@@ -20,6 +20,14 @@ const CountryKeyStackView = dynamic(
   }
 );
 
+const WorldmapView = dynamic(
+  // @ts-ignore
+  () => import("components/chloromap"),
+  {
+    ssr: false,
+  }
+);
+
 export default class Index extends Component {
   render() {
     return (
@@ -48,7 +56,12 @@ export default class Index extends Component {
             <CountryKeyStackView />
           </Col>
         </Row>
-        <Row>
+        <Row className="my-2">
+          <Col>
+            <WorldmapView />
+          </Col>
+        </Row>
+        <Row className="my-1">
           <Col>
             <CountryLatestView />
           </Col>

@@ -16,7 +16,7 @@ export const CountryLatestView = () => {
     };
 
     fetchData();
-  });
+  }, []);
 
   const columns = [
     { name: "country", title: "Country" },
@@ -28,7 +28,7 @@ export const CountryLatestView = () => {
   if (data) {
     return (
       <div>
-        <h4>Latest summary per country</h4>
+        <div className="title">Latest summary per country</div>
         <TableView rows={data} columns={columns} />
       </div>
     );

@@ -5,10 +5,11 @@ export const fetchCountryAggregatedSummary = async (): Promise<any> => {
     label: "FETCH_COUNTRY_AGGREGATED_DATA_SUMMARY",
     queryFn: async () => {
       const data = await knex.raw(`
-          select date, country, confirmed, recovered, death
-          from country_aggregated
-          where date = (select max(date) from country_aggregated)
-          order by country;
+        select date, country, confirmed, recovered, death, iso3
+        from country_aggregated A
+        left join country B on A.country = B.nicename
+        where date = (select max(date) from country_aggregated)
+        order by A.country;
       `);
       return data.rows;
     },

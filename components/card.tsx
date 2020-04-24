@@ -54,7 +54,9 @@ export const Card = (props: CardProps) => {
         {props.additionalStats ? (
           renderAdditionalStats()
         ) : (
-          <div className="mt-3 mb-0 text-sm"></div>
+          <div className="mt-3 mb-0 text-sm">
+            <span> </span>
+          </div>
         )}
       </div>
     </div>

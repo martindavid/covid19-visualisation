@@ -4,4 +4,5 @@ export type CountryAggregatedSummary = {
   confirmed: number;
   recovered: number;
   death: number;
+  iso3?: string;
 };

@@ -13,6 +13,10 @@ export const knex = Knex({
     port: process.env.DB_PORT ? parseInt(process.env.DB_PORT) : 5432,
     ssl: process.env.SSL_MODE == "true",
   },
+  pool: {
+    min: 2,
+    max: 10,
+  },
 });
 
 type runQueryProps = {
