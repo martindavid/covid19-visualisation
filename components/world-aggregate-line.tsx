@@ -17,12 +17,12 @@ const WorldAggregateLineView = () => {
           {
             name: "Death",
             type: "column",
-            data: worldData.map((row) => row.daily_death_rate_num),
+            data: worldData.map((row) => row.death),
           },
           {
             name: "Confirmed case",
             type: "line",
-            data: worldData.map((row) => row.daily_confirmed_rate_num),
+            data: worldData.map((row) => row.confirmed),
           },
         ];
 
