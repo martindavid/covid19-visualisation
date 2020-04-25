@@ -1,11 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { fetchTopCountryStats } from "db/country-aggregated";
+import { fetchLatestCrawlTime } from "db/common";
 
-const TopCountryStatsApi = async (
-	req: NextApiRequest,
-	res: NextApiResponse
-) => {
-	const data = await fetchTopCountryStats();
+const HelloApi = async (req: NextApiRequest, res: NextApiResponse) => {
+	const data = await fetchLatestCrawlTime();
 	if (data.error) {
 		console.log(data.source);
 		res.status(500).json({
@@ -18,4 +15,4 @@ const TopCountryStatsApi = async (
 	}
 };
 
-export default TopCountryStatsApi;
+export default HelloApi;

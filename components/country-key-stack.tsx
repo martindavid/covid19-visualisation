@@ -13,7 +13,6 @@ const CountryKeyStackView = () => {
 			const response = await api.fetchTopCountryStats();
 			if (response.kind == "ok") {
 				const topCountryData = response.data;
-				console.log(topCountryData);
 				const series = [
 					{
 						name: "US",
