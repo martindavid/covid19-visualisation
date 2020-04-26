@@ -90,6 +90,7 @@ export const fetchTopCountryStats = async (): Promise<any> => {
                   max(date)
                 from
                   owd_data)
+              and od.location != 'World'
               order by
                 total_cases desc
               limit 10 ) A
