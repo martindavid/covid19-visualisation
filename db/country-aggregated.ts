@@ -61,11 +61,11 @@ export const fetchTopCountryStats = async (): Promise<any> => {
     label: "FETCH_TOP_COUNTRY_STATS",
     queryFn: async () => {
       const data = await knex.raw(`
-      with days as (
-        select
-          generate_series(date '2020-01-22', now()::date - 1, '1 day')::date as day )
+        with days as (
+          select generate_series(date '2020-01-22', now()::date, '1 day')::date as day 
+        )
 
-      select
+        select
           to_char(B.day, 'yyyy-mm-dd') as date,
           B.country,
           case
@@ -79,24 +79,14 @@ export const fetchTopCountryStats = async (): Promise<any> => {
               A.country
             from
               (
-              select
-                location as country,
-                total_cases as confirmed
-              from
-                owd_data od
-              where
-                date =(
-                select
-                  max(date)
-                from
-                  owd_data)
-              and od.location != 'World'
-              order by
-                total_cases desc
-              limit 10 ) A
+              select location as country, max(total_cases) confirmed 
+              from owd_data od 
+              where location != 'World'
+              group by location order by confirmed desc
+              limit 10) A
             cross join days B) B on
             A.location = B.country
-            and A.date = B.day
+            and A.date = B.day 
       `);
       return data.rows;
     },
