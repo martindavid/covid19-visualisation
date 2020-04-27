@@ -13,69 +13,19 @@ const CountryKeyStackView = () => {
       const response = await api.fetchTopCountryStats();
       if (response.kind == "ok") {
         const topCountryData = response.data;
-        const series = [
-          {
-            name: "US",
+        const countryNames = topCountryData
+          .map((item) => item.country)
+          .filter((value, index, self) => self.indexOf(value) === index);
+
+        const series = countryNames.map((countryName) => {
+          return {
+            name: countryName,
             data: topCountryData
-              .filter((x) => x.country === "United States")
+              .filter((x) => x.country === countryName)
               .map((x) => [x.date, x.confirmed]),
-          },
-          {
-            name: "China",
-            data: topCountryData
-              .filter((x) => x.country === "China")
-              .map((x) => [x.date, x.confirmed]),
-          },
-          {
-            name: "France",
-            data: topCountryData
-              .filter((x) => x.country === "France")
-              .map((x) => [x.date, x.confirmed]),
-          },
-          {
-            name: "Spain",
-            data: topCountryData
-              .filter((x) => x.country === "Spain")
-              .map((x) => [x.date, x.confirmed]),
-          },
-          {
-            name: "Italy",
-            data: topCountryData
-              .filter((x) => x.country === "Italy")
-              .map((x) => [x.date, x.confirmed]),
-          },
-          {
-            name: "Germany",
-            data: topCountryData
-              .filter((x) => x.country === "Germany")
-              .map((x) => [x.date, x.confirmed]),
-          },
-          {
-            name: "United Kingdom",
-            data: topCountryData
-              .filter((x) => x.country === "United Kingdom")
-              .map((x) => [x.date, x.confirmed]),
-          },
-          {
-            name: "Turkey",
-            data: topCountryData
-              .filter((x) => x.country === "Turkey")
-              .map((x) => [x.date, x.confirmed]),
-          },
-          {
-            name: "Iran",
-            data: topCountryData
-              .filter((x) => x.country === "Iran")
-              .map((x) => [x.date, x.confirmed]),
-          },
-          {
-            name: "Russia",
-            data: topCountryData
-              .filter((x) => x.country === "Russia")
-              .map((x) => [x.date, x.confirmed]),
-          },
-        ];
-        console.log(series);
+          };
+        });
+
         const options = {
           chart: {
             height: "500",
