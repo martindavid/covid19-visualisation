@@ -6,6 +6,7 @@ import {
   WorldAggregateAccumulation,
 } from "db/types/world-aggregated";
 import { AustraliaSummary } from "db/types/australia-summary";
+import { AustraliaTimeSeries } from "db/types/australia-time-series";
 import { CountryAggregatedSummary } from "db/types/country-aggregated";
 
 export type WorldAggregateSummaryResponse =
@@ -26,6 +27,9 @@ export type LatestCrawlTimestampResponse =
   | GeneralApiProblem;
 export type LatestAustraliaStatsResponse =
   | { kind: "ok"; data: Array<AustraliaSummary> }
+  | GeneralApiProblem;
+export type AustraliaTimeSeriesResponse =
+  | { kind: "ok"; data: Array<AustraliaTimeSeries> }
   | GeneralApiProblem;
 export type GeneralStatusResponse =
   | { kind: "ok"; message: string }
@@ -124,6 +128,25 @@ export class DataHubApi extends Api {
   }
 
   async fetchLatestAustraliaStats(): Promise<LatestAustraliaStatsResponse> {
+    const response: ApiResponse<any> = await this.apisauce.get(
+      "/api/australia-latest"
+    );
+
+    if (!response.ok) {
+      const problem = getGeneralApiProblem(response);
+      if (problem) return problem;
+    }
+
+    try {
+      const data = response.data;
+      // @ts-ignore
+      return { kind: "ok", data: data };
+    } catch {
+      return { kind: "bad-data" };
+    }
+  }
+
+  async fetchAustraliaTimeSeriesData(): Promise<AustraliaTimeSeriesResponse> {
     const response: ApiResponse<any> = await this.apisauce.get(
       "/api/australia-latest"
     );
