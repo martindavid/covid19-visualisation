@@ -1,51 +1,52 @@
 import React from "react";
-import { Card } from "components/card";
 import { Row, Col } from "react-bootstrap";
 import { AustraliaSummary } from "db/types/australia-summary";
+import styles from "./summary-view.module.scss";
 
 type Props = {
-	data?: AustraliaSummary;
+  data?: AustraliaSummary;
 };
 
 export const SummaryView = (props: Props) => {
-	const { data } = props;
+  const { data } = props;
 
-	const mortalityRate = (data.deaths / data.confirmed) * 100;
+  const mortalityRate = (data.deaths / data.confirmed) * 100;
 
-	if (props.data) {
-		return (
-			<Row>
-				<Col md={6} xs={12}>
-					<Card
-						title="Confirmed"
-						subtitle={data.confirmed.toLocaleString()}
-						iconClass="fa-hospital"
-					/>
-				</Col>
-				<Col md={6} xs={12}>
-					<Card
-						isGood
-						title="Recovered"
-						subtitle={data.recovered.toLocaleString()}
-						iconClass="fa-heart"
-					/>
-				</Col>
-				<Col md={6} xs={12}>
-					<Card
-						title="Deaths"
-						subtitle={data.deaths.toLocaleString()}
-						iconClass="fa-cross"
-					/>
-				</Col>
-				<Col xs={12} md={6}>
-					<Card
-						title="Mortality Rate"
-						subtitle={`${mortalityRate.toFixed(2).toString()}%`}
-						iconClass="fa-cross"
-					/>
-				</Col>
-			</Row>
-		);
-	}
-	return <div>Loading...</div>;
+  const renderStats = (
+    label: string,
+    value: number | string,
+    iconClass: string
+  ) => {
+    return (
+      <div className={styles.stat}>
+        <div>
+          <div className={styles.title}>{label}</div>
+          <div className={styles.number}>{value.toLocaleString()}</div>
+        </div>
+        <div className={styles.icon}>
+          <i className={iconClass} />
+        </div>
+      </div>
+    );
+  };
+
+  if (props.data) {
+    return (
+      <Row>
+        <Col md={12} xs={12}>
+          <div className={styles.panelContainer}>
+            {renderStats("Confirmed cases", data.confirmed, "fa fa-hospital")}
+            {renderStats("Recovered", data.recovered, "fa fa-heart")}
+            {renderStats("Deaths", data.deaths, "fa fa-cross")}
+            {renderStats(
+              "Mortality rates",
+              mortalityRate.toFixed(2),
+              "fa fa-cross"
+            )}
+          </div>
+        </Col>
+      </Row>
+    );
+  }
+  return <div>Loading...</div>;
 };

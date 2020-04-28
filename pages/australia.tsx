@@ -32,14 +32,14 @@ export default class Australia extends Component {
     return (
       <Layout>
         <Row>
-          <Col xs={12} md={6}>
+          <Col xs={12} md={3}>
             {data && (
               <SummaryView
                 data={data.filter((x) => x.state === "National")[0]}
               />
             )}
           </Col>
-          <Col xs={12} md={6}>
+          <Col xs={12} md={8}>
             {data && (
               <AustraliaStateSummaryView
                 summary={data.filter((x) => x.state !== "National")}
