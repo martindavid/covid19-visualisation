@@ -28,6 +28,9 @@ export type LatestCrawlTimestampResponse =
 export type LatestAustraliaStatsResponse =
   | { kind: "ok"; data: Array<AustraliaSummary> }
   | GeneralApiProblem;
+export type LatestAustraliaDailyResponse =
+  | { kind: "ok"; data: Array<AustraliaTimeSeries> }
+  | GeneralApiProblem;
 export type AustraliaTimeSeriesResponse =
   | { kind: "ok"; data: Array<AustraliaTimeSeries> }
   | GeneralApiProblem;
@@ -148,7 +151,26 @@ export class DataHubApi extends Api {
 
   async fetchAustraliaTimeSeriesData(): Promise<AustraliaTimeSeriesResponse> {
     const response: ApiResponse<any> = await this.apisauce.get(
-      "/api/australia-latest"
+      "/api/australia-time-series"
+    );
+
+    if (!response.ok) {
+      const problem = getGeneralApiProblem(response);
+      if (problem) return problem;
+    }
+
+    try {
+      const data = response.data;
+      // @ts-ignore
+      return { kind: "ok", data: data };
+    } catch {
+      return { kind: "bad-data" };
+    }
+  }
+
+  async fetchAustraliaLatestDaily(): Promise<LatestAustraliaDailyResponse> {
+    const response: ApiResponse<any> = await this.apisauce.get(
+      "/api/australia-latest-daily"
     );
 
     if (!response.ok) {

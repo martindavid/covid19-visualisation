@@ -13,9 +13,19 @@ const AustraliaStateSummaryView = dynamic(
   }
 );
 
+const AustraliaDailyLineView = dynamic(
+  // @ts-ignore
+  () => import("components/australia-daily-line"),
+  {
+    ssr: false,
+  }
+);
+
 export default class Australia extends Component {
   state = {
-    data: null,
+    latestData: null,
+    timeSeriesData: null,
+    latestDailyData: null,
   };
 
   async componentDidMount() {
@@ -23,26 +33,52 @@ export default class Australia extends Component {
     api.setup();
     const response = await api.fetchLatestAustraliaStats();
     if (response.kind == "ok") {
-      this.setState({ data: response.data });
+      this.setState({ latestData: response.data });
+    }
+
+    const summaryResponse = await api.fetchAustraliaTimeSeriesData();
+    if (summaryResponse.kind == "ok") {
+      this.setState({ timeSeriesData: summaryResponse.data });
+    }
+
+    const latestDailyResponse = await api.fetchAustraliaLatestDaily();
+    if (latestDailyResponse.kind == "ok") {
+      this.setState({ latestDailyData: latestDailyResponse.data });
     }
   }
 
   render() {
-    const { data } = this.state;
+    const { latestDailyData, latestData, timeSeriesData } = this.state;
     return (
       <Layout>
         <Row>
+          <Col>
+            <h3 className="ml-2">Australia Statistic</h3>
+          </Col>
+        </Row>
+        <Row>
           <Col xs={12} md={3}>
-            {data && (
+            {latestData && (
               <SummaryView
-                data={data.filter((x) => x.state === "National")[0]}
+                data={latestData.filter((x) => x.state === "National")[0]}
               />
             )}
           </Col>
           <Col xs={12} md={8}>
-            {data && (
+            {latestDailyData && (
+              <AustraliaDailyLineView data={latestDailyData} />
+            )}
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12} md={12}>
+            <div className="mt-2 mb-4">
+              <h4>Distribution by states</h4>
+            </div>
+            {latestData && (
               <AustraliaStateSummaryView
-                summary={data.filter((x) => x.state !== "National")}
+                summary={latestData.filter((x) => x.state !== "National")}
+                timeSeries={timeSeriesData}
               />
             )}
           </Col>
