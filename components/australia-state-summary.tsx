@@ -54,35 +54,35 @@ const AustraliaStateSummaryView = (props: Props) => {
                 <Row>
                   <Col xs={12} md={3}>
                     <Row>
-                      <Col>
+                      <Col md={12} xs={12} lg={6}>
                         {renderStats(
                           "Confirmed cases",
                           stateData.confirmed,
                           "fa fa-hospital"
                         )}
                       </Col>
-                      <Col>
+                      <Col md={12} xs={12} lg={6}>
                         {renderStats(
                           "Active cases",
                           stateData.active_cases,
                           "fas fa-search"
                         )}
                       </Col>
-                      <Col>
+                      <Col md={12} xs={12} lg={6}>
                         {renderStats(
                           "Recovered",
                           stateData.active_cases,
                           "fa fa-heart"
                         )}
                       </Col>
-                      <Col>
+                      <Col md={12} xs={12} lg={6}>
                         {renderStats(
                           "Death cases",
                           stateData.deaths,
                           "fa fa-cross"
                         )}
                       </Col>
-                      <Col>
+                      <Col md={12} xs={12} lg={6}>
                         {renderStats(
                           "Test conducted",
                           stateData.test_conducted,
@@ -91,7 +91,7 @@ const AustraliaStateSummaryView = (props: Props) => {
                       </Col>
                     </Row>
                   </Col>
-                  <Col xs={12} md={9}>
+                  <Col xs={12} md={9} lg={6}>
                     <StateDailyCombineView
                       label="Confirmed cases vs recovered in the last 40days"
                       data={timeSeries.filter((x) => x.state == state)}
