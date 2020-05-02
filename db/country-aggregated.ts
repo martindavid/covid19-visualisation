@@ -41,9 +41,9 @@ export const fetchCountryAggregatedSummary = async (): Promise<any> => {
                   max(date)
                 from
                   country_aggregated)
-              order by
-                A.country) B on
+              ) B on
               A.iso3 = B.iso3
+              order by A.confirmed desc
       `);
       return data.rows;
     },

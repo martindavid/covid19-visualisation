@@ -1,24 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { DataHubApi } from "services/datahub";
+import React from "react";
 import { TableView } from "components/table";
 import { Loader } from "./loader";
+import { CountryAggregatedSummary } from "db/types/country-aggregated";
 
-export const CountryLatestView = () => {
-  const [data, setData] = useState(null);
+type Props = {
+  data: Array<CountryAggregatedSummary>;
+};
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const api = new DataHubApi();
-      api.setup();
-      const response = await api.fetchCountriesSummary();
-      if (response.kind == "ok") {
-        setData(response.data);
-      }
-    };
-
-    fetchData();
-  }, []);
-
+export const CountryLatestView = (props: Props) => {
+  const { data } = props;
   const columns = [
     { name: "country", title: "Country" },
     { name: "confirmed", title: "Confirmed" },

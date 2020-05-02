@@ -5,54 +5,48 @@ import { DataHubApi } from "services/datahub";
 import countries from "data/world.json";
 import { ResponsiveChoropleth } from "@nivo/geo";
 import { Loader } from "./loader";
+import { CountryAggregatedSummary } from "db/types/country-aggregated";
 
-const ChloromapView = () => {
-  const [data, setData] = useState(null);
+type Props = {
+  data: Array<CountryAggregatedSummary>;
+};
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const api = new DataHubApi();
-      api.setup();
-      const response = await api.fetchCountriesSummary();
-      if (response.kind == "ok") {
-        const mapData = response.data.map((row) => {
-          return {
-            id: row.iso3,
-            value: row.confirmed,
-          };
-        });
-        setData(mapData);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  if (!data) {
+const ChloromapView = (props: Props) => {
+  if (!props.data) {
     return <Loader />;
   }
+
+  const mapData = props.data.map((row) => {
+    return {
+      id: row.iso3,
+      value: row.confirmed,
+    };
+  });
 
   return (
     <>
       <div className="title">Confirmed case distribution</div>
       <div style={{ height: "500px" }}>
         <ResponsiveChoropleth
-          data={data}
+          data={mapData}
           projectionScale={100}
           features={countries.features}
           margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
           colors={[
             "#BCE3DC",
             "#90D1C5",
+            "#64BFAE",
+            "#FFEBA5",
             "#FFE278",
             "#FFCE1E",
             "#FC9E8A",
+            "#FA7558",
             "#F6949E",
             "#F3707D",
             "#F04C5D",
             "#A83541",
           ]}
-          domain={[0, 100000]}
+          domain={[0, 150000]}
           unknownColor="#666666"
           label="properties.name"
           valueFormat=".2s"
