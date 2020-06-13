@@ -52,7 +52,7 @@ const AustraliaStateSummaryView = (props: Props) => {
                   </Col>
                 </Row>
                 <Row>
-                  <Col xs={12} md={3}>
+                  <Col xs={12} md={4} lg={4}>
                     <Row>
                       <Col md={12} xs={12} lg={6}>
                         {renderStats(
@@ -71,7 +71,7 @@ const AustraliaStateSummaryView = (props: Props) => {
                       <Col md={12} xs={12} lg={6}>
                         {renderStats(
                           "Recovered",
-                          stateData.active_cases,
+                          stateData.recovered,
                           "fa fa-heart"
                         )}
                       </Col>
@@ -91,7 +91,7 @@ const AustraliaStateSummaryView = (props: Props) => {
                       </Col>
                     </Row>
                   </Col>
-                  <Col xs={12} md={9} lg={6}>
+                  <Col xs={12} md={8} lg={8}>
                     <StateDailyCombineView
                       label="Confirmed cases vs recovered in the last 40days"
                       data={timeSeries.filter((x) => x.state == state)}

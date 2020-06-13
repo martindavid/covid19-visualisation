@@ -57,14 +57,14 @@ export default class Australia extends Component {
           </Col>
         </Row>
         <Row>
-          <Col xs={12} md={3}>
+          <Col xs={12} md={4} lg={4}>
             {latestData && (
               <SummaryView
                 data={latestData.filter((x) => x.state === "National")[0]}
               />
             )}
           </Col>
-          <Col xs={12} md={8}>
+          <Col xs={12} md={8} lg={8}>
             {latestDailyData && (
               <AustraliaDailyLineView data={latestDailyData} />
             )}
