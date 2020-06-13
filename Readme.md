@@ -4,6 +4,14 @@ My fun project to visualise COVID19 dataset from [Datahub.io](https://datahub.io
 
 ## Getting Started
 
+### Clone the repository
+
+```
+# Clone the repo
+$ git clone git@github.com:martindavid/covid19-visualisation.git
+```
+
+### Add the required environment variable
 To get the data that is required for this visualisation you need to have run the [crawler](https://github.com/martindavid/covid19-data-crawler) first.
 
 - Before you run the below command, make sure to create a copy of `.env.example` and rename it to `.env`. Adjust the value inside that file to the environment in your machine.
@@ -16,10 +24,9 @@ To get the data that is required for this visualisation you need to have run the
   DB_NAME=
   ```
 
-```
-# Clone the repo
-$ git clone git@github.com:martindavid/covid19-visualisation.git
+### Run the application locally
 
+```
 # Install the dependencies
 $ cd covid19-visualisation
 $ npm install
