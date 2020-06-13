@@ -34,7 +34,7 @@ const CountryKeyStackView = () => {
             enabled: false,
           },
           title: {
-            text: "Total confirm cases by day in key countries",
+            text: "Total confirm cases by day in key countries (last 2 months)",
           },
           stroke: {
             width: [1, 2],

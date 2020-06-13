@@ -20,14 +20,14 @@ export const fetchWorldAggregatedSummary = async (): Promise<any> => {
           1 as id,
           total_cases as confirmed,
           total_deaths as death
-        from owd_data od 
+        from owd_data od
         where location = 'World' and date = (select max(date) from owd_data)) A
         inner join
         (select
           1 as id,
           total_cases as confirmed_last_week,
           total_deaths as death_last_week
-        from owd_data od 
+        from owd_data od
         where location = 'World' and date = (select max(date) - 7 from owd_data)
         ) B on A.id = B.id
         inner join (
@@ -36,14 +36,14 @@ export const fetchWorldAggregatedSummary = async (): Promise<any> => {
             recovered,
             recovered_last_week
           from
-            (select 1 as id, recovered from worldwide_aggregated 
+            (select 1 as id, recovered from worldwide_aggregated
             where date = (select max(date) from worldwide_aggregated)) C
           join (
             select 1 as id, recovered as recovered_last_week
             from worldwide_aggregated
             where date = (select max(date) - 7 from worldwide_aggregated) ) D on
             C.id = D.id ) C on
-          A.id = C.id 
+          A.id = C.id
         `);
       return data.rows && data.rows.length > 0 ? data.rows[0] : null;
     },
@@ -61,10 +61,10 @@ export const fetchWorldAggregateDataAccumulation = async (): Promise<any> => {
     label: "FETCH_WORLD_AGGREGATED_DATA",
     queryFn: async () => {
       const data = await knex.raw(`
-        select to_char(date, 'YYYY-MM-DD') date, new_cases as confirmed, new_deaths as death 
-        from owd_data od 
+        select to_char(date, 'YYYY-MM-DD') date, new_cases as confirmed, new_deaths as death
+        from owd_data od
         where location = 'World'
-        and date >= '2020-01-22'
+        and date >= now()::date - 60
               `);
 
       return data.rows;

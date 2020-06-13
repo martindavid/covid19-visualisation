@@ -42,7 +42,7 @@ const WorldAggregateLineView = () => {
             width: [0, 2],
           },
           title: {
-            text: "New cases vs Deaths by day",
+            text: "New cases vs Deaths by day (last 2 months)",
           },
           dataLabels: {
             enabled: false,

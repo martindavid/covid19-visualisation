@@ -62,7 +62,7 @@ export const fetchTopCountryStats = async (): Promise<any> => {
     queryFn: async () => {
       const data = await knex.raw(`
         with days as (
-          select generate_series(date '2020-01-22', now()::date - 1, '1 day')::date as day
+          select generate_series(date (now()::date - 60), now()::date - 1, '1 day')::date as day
         )
 
         select
