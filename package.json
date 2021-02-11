@@ -11,7 +11,7 @@
     "@devexpress/dx-react-grid": "^2.6.2",
     "@devexpress/dx-react-grid-bootstrap4": "^2.6.2",
     "@nivo/geo": "^0.61.1",
-    "apexcharts": "^3.19.0",
+    "apexcharts": "^3.24.0",
     "apisauce": "^1.1.1",
     "classnames": "^2.2.6",
     "knex": "^0.21.1",
